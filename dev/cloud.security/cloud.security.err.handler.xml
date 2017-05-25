@@ -8,4 +8,15 @@
     <EN errMsg="User Id or Password can't be empty"/>
     <CN errMsg="用户名或密码不能为空"/>
   </SECU-00002>	
+  
+  <SECU-00003>
+    <EN errMsg="User Id:[%] or Password: can't be empty"/>
+    <CN errMsg="用户名或密码不能为空"/>
+  </SECU-00003>
+  
+  <SECU-00004>
+    <EN errMsg="User Id:[%] or Password:[%] can't be empty"/>
+    <CN errMsg="用户名或密码不能为空"/>
+  </SECU-00004>
+  	
 </errHandler>

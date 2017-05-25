@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<errHandler deafultLanguage="EN">
+  <SECU-00001>
+    <EN errMsg="Invalide User Id or Password"/>
+    <CN errMsg="无效的用户名或密码"/>
+  </SECU-00001>	 
+  <SECU-00002>
+    <EN errMsg="User Id or Password can't be empty"/>
+    <CN errMsg="用户名或密码不能为空"/>
+  </SECU-00002>	
+</errHandler>

@@ -12,7 +12,11 @@
   </SECU-00003>
   
   <SECU-00004>
-    <EN errMsg="User Id:[%] or Password:[%] can't be empty"/> 
+    <EN errMsg="Invalide User Id or Auth code."/> 
   </SECU-00004>
+  
+   <SECU-00005>
+    <EN errMsg="Invalide Inquire code."/> 
+  </SECU-00005>
   	
 </errHandler>

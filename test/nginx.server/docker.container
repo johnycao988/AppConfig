@@ -1,1 +1,1 @@
-docker run -p 7099:7099 -v /AppConfig/test/nginx.server/nginx.conf:/etc/nginx/nginx.conf --name nginx.server  -d 10.39.101.226:5000/nginx
+docker run -p 7099:7099 -p 8500:8500 -v /AppConfig/test/nginx.server/nginx.conf:/etc/nginx/nginx.conf --name nginx.server  -d 10.39.101.226:5000/nginx

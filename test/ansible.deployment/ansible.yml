@@ -6,4 +6,4 @@
     shell: cd /AppConfig && git fetch && git merge origin/master 
     
   - name: Re-start CS Security Server containers...
-    shell: docker restart cloud.security.server
+    shell: docker restart cloud.config.server cloud.security.service 

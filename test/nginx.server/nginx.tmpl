@@ -9,13 +9,15 @@ events {
 
 http {
 
-  {{range services "cloud.security.service"}}
 
-  upstream cloud.security.service {
-     least_conn;{{range service .Name}}
-     server {{.Address}}:{{.Port}};{{end}}
-     }
-   {{end}}
+   upstream cloud.security.service {
+   
+      {{range service "cloud.security.service"}}    
+    server {{.Address}}:{{.Port}} fail_timeout=0;    
+    {{end}} 
+
+ } 
+  
    
 
         ##

@@ -18,9 +18,9 @@
                 <DefaultRolloverStrategy max="20"/>
             </RollingFile>
       
-             <ELK name="ELK" host="10.39.101.226" port="3456" protocol="TCP">
+             <Socket name="ELK" host="10.39.101.226" port="3456" immediateFlush="false" connectTimeoutMillis="5000">>
                 <PatternLayout pattern="%d{yyyy-MM-dd 'at' HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n"/>            
-            </ELK>
+            </Socket>
   
         </appenders>
       

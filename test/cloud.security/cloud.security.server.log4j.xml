@@ -36,6 +36,7 @@
             <logger name="cloud.security.service" level="debug">
                 <appender-ref ref="RollingFile"/>
                <appender-ref ref="ELK"/>
+                <appender-ref ref="logstash"/>
             </logger> 
             
         </loggers>

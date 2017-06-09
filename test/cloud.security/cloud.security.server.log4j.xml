@@ -18,10 +18,12 @@
                 <DefaultRolloverStrategy max="20"/>
             </RollingFile>
       
-             <Socket name="ELK" host="10.39.101.226" port="3456" immediateFlush="false" connectTimeoutMillis="5000" protocol="TCP">
+             <Socket name="logstash" host="10.39.101.226" port="3456" immediateFlush="false" connectTimeoutMillis="5000" protocol="TCP">
                 <PatternLayout pattern="%d{yyyy-MM-dd 'at' HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n"/>            
             </Socket>
-  
+            
+             <ElasticAppender  name="ELK" uri="native://10.39.101.226:9300" manager="true" />
+              
         </appenders>
       
         <loggers>
@@ -33,7 +35,7 @@
             
             <logger name="cloud.security.service" level="debug">
                 <appender-ref ref="RollingFile"/>
-                  <appender-ref ref="ELK"/>
+                <appender-ref ref="ELK"/>
             </logger> 
             
         </loggers>

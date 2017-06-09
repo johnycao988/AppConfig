@@ -22,7 +22,7 @@
                 <PatternLayout pattern="%d{yyyy-MM-dd 'at' HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n"/>            
             </Socket>
             
-             <ElasticAppender  name="ELK" uri="native://10.39.101.226:9300"/>
+             <ElasticAppender  name="ELK" uri="native://10.39.101.226:9200"/>
               
         </appenders>
       

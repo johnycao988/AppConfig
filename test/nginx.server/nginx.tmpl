@@ -16,7 +16,7 @@ http {
  }
  
    upstream cloud-security-service {   
-   {{range service "cloud-security-service"}}
+   {{range service "cloud-security-service-3089"}}
     server {{.Address}}:{{.Port}}  weight=1; 
     {{end}} 
  }

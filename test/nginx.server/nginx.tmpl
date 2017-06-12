@@ -111,7 +111,17 @@ http {
         
         } 
         
-        location /service/consul-server {
+        
+    
+  }
+  
+  server {
+
+        listen       8501;
+
+        server_name  2; 
+        
+        location / {
 
            proxy_pass http://consul-server ;
         

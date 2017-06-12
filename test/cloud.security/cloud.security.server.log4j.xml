@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <log4j:configuration>
-
 	<appender name="ConsoleAppender" class="org.apache.log4j.ConsoleAppender">
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%d{yyyy-MM-dd hh:mm:ss}:%p %t %c - %m%n" />
 		</layout>
 	</appender>
 
-	<appender name="RollingFileAppender" class="org.apache.log4j.RollingFileAppender">
-		<param name="Append" value="false" />
-		<param name="MaxFileSize" value="1KB" />
+	<appender name="DailyRollingFileAppender" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="Append" value="false" /> 
 		<param name="File" value="c:/temp/cloud.security.service.log" />
 		<param name="MaxBackupIndex" value="3" />
 		<layout class="org.apache.log4j.PatternLayout">
@@ -29,12 +27,12 @@
 		<priority value="debug" />
 		<appender-ref ref="ConsoleAppender" />
 		<appender-ref ref="SocketAppender" />
+		<appender-ref ref="DailyRollingFileAppender" />
 	</category>
 
 	<root>
 		<priority value="debug" />
-		<appender-ref ref="RollingFileAppender" />
-		<appender-ref ref="SocketAppender" />
+		<appender-ref ref="ConsoleAppender" /> 
 	</root>
 
 </log4j:configuration>

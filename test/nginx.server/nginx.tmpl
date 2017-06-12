@@ -10,13 +10,21 @@ events {
 http {
 
 
-   upstream cloud.security.service {
-   
-      {{range service "cloud.security.service"}}    
-    server {{.Address}}:{{.Port}} fail_timeout=0;    
-    {{end}} 
-
- } 
+   upstream cloud-config-service {
+     
+    least_conn;
+    {{range service "cloud-config-service"}}
+    server {{.Address}}:{{.Port}};{{end}}
+  } 
+ 
+   upstream cloud-security-service {
+     
+    least_conn;
+    {{range service "cloud-security-service-3089"}}
+    server {{.Address}}:{{.Port}};{{end}}
+  }
+  
+ 
   
    
 
@@ -94,9 +102,14 @@ http {
         server_name  2;
 
 
-        location /service/cloud.security.service {
+        location /service/cloud-security-service {
 
-        proxy_pass http://cloud.security.service ;
+             proxy_pass http://cloud-security-service ;
+         }
+ 
+         location /service/cloud-config-service {
+
+             proxy_pass http://cloud-config-service ;
          }
  
     }

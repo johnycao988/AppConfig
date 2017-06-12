@@ -21,6 +21,11 @@ http {
     {{end}} 
  }
  
+   upstream consul-server {   
+   {{range service "consul-8500"}}
+    server {{.Address}}:{{.Port}}  weight=1; 
+    {{end}} 
+ }
         ##
         # Basic Settings
         ##
@@ -106,7 +111,11 @@ http {
         
         } 
         
-     
+        location /service/consul-server {
+
+           proxy_pass http://consul-server ;
+        
+        } 
     
   }
 

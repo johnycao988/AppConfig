@@ -99,18 +99,24 @@ http {
 
         server_name  2;
 
-        location /service/cloud-security-service/ {
+        location /{
 
-           proxy_pass http://cloud-security-service/ ;
-        
-        } 
-         
-        location /service/cloud-config-service/ {
-
-           proxy_pass http://cloud-config-service/ ;
+           proxy_pass http://cloud-security-service/;
         
         }  
-    
+  }
+  
+    server {
+
+        listen       7098;
+
+        server_name  2;
+
+        location /{
+
+           proxy_pass http://cloud-config-service/;
+        
+        }  
   }
   
   server {

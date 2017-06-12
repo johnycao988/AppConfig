@@ -1,41 +1,58 @@
-<?xml version="1.0" encoding="UTF-8"?>
-    <configuration status="error" monitorInterval="30">
-        <!--先定义所有的appender-->
-        <appenders>
-            <!--这个输出控制台的配置-->
-            <Console name="Console" target="SYSTEM_OUT">
-                <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
-                <ThresholdFilter level="trace" onMatch="ACCEPT" onMismatch="DENY"/>
-                <!--这个都知道是输出日志的格式-->
-                <PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%xEx%n"/>
-            </Console>
-  
-            <RollingFile name="RollingFile" fileName="/logs/cloud.security.service.log"
-                     filePattern="log/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
-                <PatternLayout pattern="%d{yyyy-MM-dd 'at' HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n"/>
-                <SizeBasedTriggeringPolicy size="50MB"/>
-                <!-- DefaultRolloverStrategy属性如不设置，则默认为最多同一文件夹下7个文件，这里设置了20 -->
-                <DefaultRolloverStrategy max="20"/>
-            </RollingFile>
-      
-             <Socket name="logstash" host="10.39.101.226" port="3456" immediateFlush="false" connectTimeoutMillis="5000" protocol="TCP" activity="false">
-                <PatternLayout pattern="%d{yyyy-MM-dd 'at' HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n"/>            
-            </Socket>
-            
-             <ElasticAppender  name="ELK" uri="native://10.39.101.226:9200" cluster="elasticsearch" />
-              
-        </appenders>
-      
-        <loggers>
-          
-            <root  level="trace">
-                 <appender-ref ref="Console"/>
-                
-            </root> 
-            
-            <logger name="cloud.security.service" level="debug">
-                <appender-ref ref="RollingFile"/> 
-            </logger> 
-            
-        </loggers>
-    </configuration>
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<log4j:configuration>
+
+	<appender name="ConsoleAppender" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd hh:mm:ss}:%p %t %c - %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="RollingFileAppender" class="org.apache.log4j.RollingFileAppender">
+		<param name="Append" value="false" />
+		<param name="MaxFileSize" value="1KB" />
+		<param name="File" value="c:/temp/cloud.security.service.log" />
+		<param name="MaxBackupIndex" value="3" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd hh:mm:ss}:%p %t %c - %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="SocketAppender" class="org.apache.log4j.net.SocketAppender">
+		<param name="threshold" value="fatal" />
+		<param name="remoteHost" value="10.39.101.226" />
+		<param name="port" value="3456" />
+		<param name="locationInfo" value="true" />
+	</appender>
+
+	<category name="cloud.security.service" additivity="true">
+		<priority value="debug" />
+		<appender-ref ref="ConsoleAppender" />
+		<appender-ref ref="file.text.DATE_FILE" />
+	</category>
+
+	<root>
+		<priority value="debug" />
+		<appender-ref ref="RollingFileAppender" />
+		<appender-ref ref="SocketAppender" />
+	</root>
+
+</log4j:configuration>
+
+
+
+<!-- log4j2 configurations <?xml version="1.0" encoding="UTF-8"?> <configuration 
+	status="error" monitorInterval="30"> <appenders> <Console name="Console" 
+	target="SYSTEM_OUT"> <ThresholdFilter level="trace" onMatch="ACCEPT" onMismatch="DENY"/> 
+	<PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%xEx%n"/> 
+	</Console> <RollingFile name="RollingFile" fileName="/logs/cloud.security.service.log" 
+	filePattern="log/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz"> <PatternLayout 
+	pattern="%d{yyyy-MM-dd 'at' HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n"/> 
+	<SizeBasedTriggeringPolicy size="50MB"/> <DefaultRolloverStrategy max="20"/> 
+	</RollingFile> <Socket name="logstash" host="10.39.101.226" port="3456" immediateFlush="false" 
+	connectTimeoutMillis="5000" protocol="TCP" activity="false"> <PatternLayout 
+	pattern="%d{yyyy-MM-dd 'at' HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n"/> 
+	</Socket> <ElasticAppender name="ELK" uri="native://10.39.101.226:9200" cluster="elasticsearch" 
+	/> </appenders> <loggers> <root level="trace"> <appender-ref ref="Console"/> 
+	</root> <logger name="cloud.security.service" level="debug"> <appender-ref 
+	ref="RollingFile"/> </logger> </loggers> </configuration> log4j2 -->
